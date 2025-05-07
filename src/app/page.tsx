@@ -1,33 +1,26 @@
 'use client'
 
-import TodoContainer from "@/lib/components/TodoContainer/TodoContainer";
-import TodoForm from "@/lib/components/TodoForm/TodoForm";
+import TodoComponent from "@/lib/components/TodoComponent/TodoComponent";
+import userState from "@/lib/state/UserState";
+import { useAtom } from "jotai";
+
+
 
 export default function Home() {
-  const todoList:{
-    id:number,
-    name: string,
-    description: string
-  }[] = []
 
-  function AddTodotoList(todo:{
-    name: string,
-    description: string
-  }){
-    const todoItem = {
-      ...todo,
-      id:0
-    };
-    todoItem.id = todoList.length;
-    todoList.push(todoItem);
-    console.log(todoList);
-  }
+  const [user] = useAtom(userState);
 
   return (
     <div className="">
       <main className="">
-        <TodoForm AddToList={AddTodotoList}/>
-        <TodoContainer todoList={todoList} />
+        {
+          user !== null ?
+            <TodoComponent />
+            :
+            <>
+              Not logged in
+            </>
+        }
       </main>
     </div>
   );

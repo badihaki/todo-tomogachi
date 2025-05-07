@@ -1,4 +1,4 @@
-import TodoForm from '@/lib/components/TodoForm/TodoForm'
+import TodoForm from '@/lib/components/TodoComponent/TodoForm/TodoForm'
 import React from 'react'
 
 function Todo() {

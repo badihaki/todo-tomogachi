@@ -27,7 +27,7 @@ function TodoForm(props:{
   }) {
     const { name, value } = event.target;
     const formCopy = { ...form };
-    formCopy[name] = value;
+    formCopy[name as keyof typeof formCopy] = value;
     setForm(formCopy);
   }
 
