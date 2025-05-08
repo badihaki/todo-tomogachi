@@ -1,9 +1,25 @@
 import prisma from "@/lib/prisma";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-    if(req.method==='GET'){
-        const user = await prisma.user.findFirst();
-        return res.status(200).json(user);
-    }
+export async function GET() {
+  try {
+    const user = await prisma.user.findFirst();
+    const response = NextResponse.json(
+      {
+        success: true,
+        data: user,
+      },
+      { status: 200 }
+    );
+    return response;
+  } catch (err:unknown) {
+    return NextResponse.json(
+      {
+        error: err.message,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
