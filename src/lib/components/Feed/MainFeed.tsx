@@ -1,27 +1,15 @@
-import React, { useEffect } from 'react'
+import userAtom from '@/lib/state/UserState'
+import { useAtom } from 'jotai'
+import React from 'react'
 
 function MainFeed() {
-    useEffect(()=>{
-        GetUser();
-    },[])
-
-    async function GetUser() {
-        try{
-            const data = await fetch("/api/users");
-            console.log(data);
-            const user = await data.json();
-            console.log(user);
-        }catch(err){
-            console.log(err);
-        }
-    }
+    const [user] = useAtom(userAtom);
 
     return (
         <div>
             Main feed
-            <div>
-                {/* {admin?.username} */}
-            </div>
+            <br />
+            {user? `Welcome ${user.username}` : ""}
         </div>
     )
 }
