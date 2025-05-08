@@ -1,5 +1,6 @@
 'use client'
 
+import MainFeed from "@/lib/components/Feed/MainFeed";
 import TodoComponent from "@/lib/components/TodoComponent/TodoComponent";
 import userState from "@/lib/state/UserState";
 import { useAtom } from "jotai";
@@ -21,6 +22,8 @@ export default function Home() {
               Not logged in
             </>
         }
+
+        <MainFeed />
       </main>
     </div>
   );

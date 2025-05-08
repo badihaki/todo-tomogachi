@@ -4,6 +4,9 @@ function MainFeed() {
     return (
         <div>
             Main feed
+            <div>
+                {/* {admin?.username} */}
+            </div>
         </div>
     )
 }
