@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import LogInComponent from './LogInComponent';
 import SignUpComponent from './SignUpComponent';
 
-function AuthComponent() {
+function ProfileComponent() {
     useEffect(() => {
         GetUser();
     })
@@ -25,7 +25,7 @@ function AuthComponent() {
     }
 
     return (
-        <section>
+        <section id='profile' className='bg-blue-100 place-items-center w-full mx-auto'>
             {user !== null ?
                 <>
                     Logged in {user.username}
@@ -40,4 +40,4 @@ function AuthComponent() {
     )
 }
 
-export default AuthComponent
+export default ProfileComponent

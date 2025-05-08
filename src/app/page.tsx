@@ -1,6 +1,6 @@
 'use client'
 
-import AuthComponent from "@/lib/components/AuthComponent/AuthComponent";
+import ProfileComponent from "@/lib/components/AuthComponent/ProfileComponent";
 import MainFeed from "@/lib/components/Feed/MainFeed";
 import TodoComponent from "@/lib/components/TodoComponent/TodoComponent";
 import userAtom from "@/lib/state/UserState";
@@ -20,7 +20,7 @@ export default function Home() {
             <TodoComponent />
             :
             <>
-              <AuthComponent />
+              <ProfileComponent />
             </>
         }
 
