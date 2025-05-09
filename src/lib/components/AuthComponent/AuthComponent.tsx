@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import LogInComponent from './LogInComponent';
 import SignUpComponent from './SignUpComponent';
 
-function ProfileComponent() {
+function AuthComponent() {
     useEffect(() => {
         GetUser();
     })
@@ -40,4 +40,4 @@ function ProfileComponent() {
     )
 }
 
-export default ProfileComponent
+export default AuthComponent
