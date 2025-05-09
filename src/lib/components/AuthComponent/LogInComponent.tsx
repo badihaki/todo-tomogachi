@@ -7,8 +7,11 @@ function LogInComponent() {
         setShowForm(!showForm);
     }
 
-    const handleSubmitForm = () => {
-        //
+    const handleSubmitForm = (formData:{
+        email:string,
+        password:string
+    }) => {
+        console.log(formData);
     }
 
     return (
