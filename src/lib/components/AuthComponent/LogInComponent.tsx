@@ -7,11 +7,16 @@ function LogInComponent() {
         setShowForm(!showForm);
     }
 
-    const handleSubmitForm = (formData:{
-        email:string,
-        password:string
+    const handleSubmitForm = async (formData: {
+        email: string,
+        password: string
     }) => {
-        console.log(formData);
+        const response = await fetch("/api/auth/login",{
+            method:'POST',
+            body:JSON.stringify(formData),
+        })
+        const respData = await response.json();
+        console.log(respData);
     }
 
     return (
