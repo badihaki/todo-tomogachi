@@ -11,7 +11,9 @@ export async function POST(req: NextRequest) {
             email
         }
     });
-    console.log(user);
+    if(user === null){
+        throw new Error("User doesn't exist");
+    }
     if(user?.password === password){
         const response = NextResponse.json(
           {
@@ -25,7 +27,7 @@ export async function POST(req: NextRequest) {
         return response;
     }
     else{
-        throw new Error("Username doesn't match");
+        throw new Error("Wrong password");
     }
   } catch (err: any) {
     return NextResponse.json(
