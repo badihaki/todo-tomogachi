@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, FormEventHandler, useState } from 'react'
 
-function LogInForm(props: {
+function SignUpForm(props: {
     handleSubmitForm: (formData: {
         email: string,
         password: string
@@ -59,4 +59,4 @@ function LogInForm(props: {
     )
 }
 
-export default LogInForm
+export default SignUpForm

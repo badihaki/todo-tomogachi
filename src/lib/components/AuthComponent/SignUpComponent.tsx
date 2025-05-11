@@ -1,10 +1,52 @@
-import React from 'react'
+import userAtom from '@/lib/state/UserState';
+import { useAtom } from 'jotai';
+import React, { useState } from 'react'
+import SignUpForm from './SignUpForm';
 
 function SignUpComponent() {
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [user, setUser] = useAtom(userAtom);
+
+  const handleShowBtnClick = () => {
+    setShowForm(!showForm);
+  }
+  const handleSubmitForm = async (formData: {
+    email: string,
+    password: string
+  }) => {
+    console.log("submitting form");
+  }
+
+  async function handleError(errMsg: string) {
+    setErrorMsg(errMsg);
+    setTimeout(() => {
+      setErrorMsg(null);
+    }, 3200);
+  }
+
   return (
-    <div>
-      Sign Up Below
-    </div>
+    <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit`} >
+      <button onClick={handleShowBtnClick} id='btn-show-login' className='transition-all ease-in-out duration-500 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer'>{
+        showForm ?
+          "Hide This Form" : "Sign Up"
+      }</button>
+
+      {
+        showForm ?
+          <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+          :
+          ""
+      }
+      {
+        errorMsg != null ?
+          <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>
+            {errorMsg}
+          </div>
+          :
+          ""
+      }
+    </section>
   )
 }
 
