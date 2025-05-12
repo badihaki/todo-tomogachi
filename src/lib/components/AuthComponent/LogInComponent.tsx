@@ -48,6 +48,8 @@ function LogInComponent() {
         <section id='section-login' className={`transition-all ease-in-out duration-500 h-fit`}>
             {
                 user != null ?
+                    <div>Loading...</div>
+                    :
                     <>
                         <button onClick={handleShowBtnClick} id='btn-show-login' className='transition-all ease-in-out duration-500 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer'>{
                             showForm ?
@@ -60,8 +62,6 @@ function LogInComponent() {
                                 ""
                         }
                     </>
-                    :
-                    <div>Loading...</div>
                 }
                 
                 {

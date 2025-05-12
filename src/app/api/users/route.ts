@@ -1,4 +1,5 @@
-import prisma from "@/lib/prisma";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import prisma from "@/lib/util/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -12,7 +13,7 @@ export async function GET() {
       { status: 200 }
     );
     return response;
-  } catch (err:unknown) {
+  } catch (err:any) {
     return NextResponse.json(
       {
         error: err.message,
