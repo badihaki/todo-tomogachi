@@ -8,9 +8,12 @@ export async function GET() {
     const session = await verifySession();
     console.log(session);
     if (session === null) {
-      return NextResponse.json({ content: "No sessions, No Content" }, { status: 200 });
+      return NextResponse.json(
+        { content: "No sessions, No Content" },
+        { status: 200 }
+      );
     }
-    
+
     console.log("third step - found sessions yoooooo");
     const { data } = session;
     console.log(data);

@@ -26,7 +26,6 @@ function LogInComponent() {
                 throw new Error(respData.error);
             }
             else {
-                console.log(respData.data);
                 setUser(respData.data);
             }
             /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -62,16 +61,16 @@ function LogInComponent() {
                                 ""
                         }
                     </>
-                }
-                
-                {
-                    errorMsg != null ?
-                        <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>
-                            {errorMsg}
-                        </div>
-                        :
-                        ""
-                }
+            }
+
+            {
+                errorMsg != null ?
+                    <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>
+                        {errorMsg}
+                    </div>
+                    :
+                    ""
+            }
             <div className='w-full border-b-4 border-white' />
         </section>
     )

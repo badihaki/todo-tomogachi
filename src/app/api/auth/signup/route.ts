@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import prisma from "@/lib/util/prisma";
+import { createSession } from "@/lib/util/session";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -16,6 +17,8 @@ export async function POST(req: NextRequest) {
         username,
       },
     });
+    
+    await createSession(user);
 
     const response = NextResponse.json(
       {
