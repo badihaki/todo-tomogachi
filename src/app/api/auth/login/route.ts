@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,27 +8,26 @@ export async function POST(req: NextRequest) {
 
   try {
     const user = await prisma.user.findUnique({
-        where:{
-            email
-        }
+      where: {
+        email,
+      },
     });
-    if(user === null){
-        throw new Error("User doesn't exist");
+    if (user === null) {
+      throw new Error("User doesn't exist");
     }
-    if(user?.password === password){
-        const response = NextResponse.json(
-          {
-            success: true,
-            data: user,
-          },
-          {
-            status: 200,
-          }
-        );
-        return response;
-    }
-    else{
-        throw new Error("Wrong password");
+    if (user?.password === password) {
+      const response = NextResponse.json(
+        {
+          success: true,
+          data: user,
+        },
+        {
+          status: 200,
+        }
+      );
+      return response;
+    } else {
+      throw new Error("Wrong password");
     }
   } catch (err: any) {
     return NextResponse.json(

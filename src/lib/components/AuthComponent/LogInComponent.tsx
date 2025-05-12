@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import LogInForm from './LogInForm';
 import { useAtom } from 'jotai';
@@ -28,6 +29,7 @@ function LogInComponent() {
                 console.log(respData.data);
                 setUser(respData.data);
             }
+            /* eslint-disable @typescript-eslint/no-explicit-any */
         }
         catch(err:any){
             console.log(err);
@@ -39,7 +41,7 @@ function LogInComponent() {
         setErrorMsg(errMsg);
         setTimeout(() => {
             setErrorMsg(null);
-        }, 3200);
+        }, 7200);
     }
 
     return (

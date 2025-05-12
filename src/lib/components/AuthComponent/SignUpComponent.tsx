@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import userAtom from '@/lib/state/UserState';
 import { useAtom } from 'jotai';
 import React, { useState } from 'react'
 import SignUpForm from './SignUpForm';
-
 function SignUpComponent() {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -13,16 +13,44 @@ function SignUpComponent() {
   }
   const handleSubmitForm = async (formData: {
     email: string,
-    password: string
+    password: string,
+    confirmPassword: string,
+    username:string
   }) => {
     console.log("submitting form");
+    if (formData.password === formData.confirmPassword) {
+      try {
+        const response = await fetch("api/auth/signup", {
+          method: "POST",
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            username: formData.username
+          })
+        });
+        const respData = await response.json();
+        console.log(respData);
+        if (respData.error != null) {
+          throw new Error(respData.error);
+        }
+        else {
+          console.log(respData.data);
+          setUser(respData.data);
+        }
+      } catch (err: any) {
+        handleError(err.message);
+      }
+    }
+    else {
+      handleError("Passwords don't match!");
+    }
   }
 
   async function handleError(errMsg: string) {
     setErrorMsg(errMsg);
     setTimeout(() => {
       setErrorMsg(null);
-    }, 3200);
+    }, 7200);
   }
 
   return (
