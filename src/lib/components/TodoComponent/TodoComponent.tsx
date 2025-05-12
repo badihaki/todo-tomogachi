@@ -24,7 +24,7 @@ function TodoComponent() {
       }
 
   return (
-    <section id='todo-section'>
+    <section id='todo-section' className="">
       <TodoForm AddToList={AddTodotoList}/>
       <TodoContainer todoList={todoList} />
     </section>

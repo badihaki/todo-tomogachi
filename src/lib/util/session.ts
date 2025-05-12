@@ -48,8 +48,8 @@ export async function createSession(user: IUser) {
 export async function verifySession() {
   const cookiesObj = await cookies();
   const session = await cookiesObj.get(cookie.name);
-  console.log("session: ");
-  console.log(session);
+  // console.log("session: ");
+  // console.log(session);
   
   if (!session) {
     return null;

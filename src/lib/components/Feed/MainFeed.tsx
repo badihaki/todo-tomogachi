@@ -7,9 +7,20 @@ function MainFeed() {
 
     return (
         <div>
-            Main feed
-            <br />
-            {user? `Welcome ${user.username}` : ""}
+            <h2>
+                Main feed
+            </h2>
+            <p>
+                {user ? `Welcome ${user.username}` : ""}
+            </p>
+            <p>
+                {
+                    user ?
+                        "Find some friends to follow to get the most out of your feed!"
+                        :
+                        "Please log in or sign up to start personalizing your feed"
+                }
+            </p>
         </div>
     )
 }
