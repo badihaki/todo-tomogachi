@@ -15,7 +15,7 @@ function SignUpComponent() {
     email: string,
     password: string,
     confirmPassword: string,
-    username:string
+    username: string
   }) => {
     console.log("submitting form");
     if (formData.password === formData.confirmPassword) {
@@ -55,17 +55,25 @@ function SignUpComponent() {
 
   return (
     <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit`} >
-      <button onClick={handleShowBtnClick} id='btn-show-login' className='transition-all ease-in-out duration-500 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer'>{
-        showForm ?
-          "Hide This Form" : "Sign Up"
-      }</button>
-
       {
-        showForm ?
-          <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+        user != null ?
+          <>
+            <button onClick={handleShowBtnClick} id='btn-show-login' className='transition-all ease-in-out duration-500 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer'>{
+              showForm ?
+                "Hide This Form" : "Sign Up"
+            }</button>
+
+            {
+              showForm ?
+                <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+                :
+                ""
+            }
+          </>
           :
-          ""
+          <div>Loading...</div>
       }
+      
       {
         errorMsg != null ?
           <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>
