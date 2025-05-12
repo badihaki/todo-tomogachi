@@ -10,14 +10,15 @@ function AuthComponent() {
     })
 
     // const [user, setUser] = useAtom(userAtom); // bring this back later
-    const [user] = useAtom(userAtom);
+    const [user, setUser] = useAtom(userAtom);
 
     async function GetUser() {
         try {
             const data = await fetch("/api/users").then(res => res.json());
-            console.log(data);
+            // console.log(data);
             const fetchedUser = data.data;
             console.log(fetchedUser);
+            setUser(fetchedUser);
             // setUser(fetchedUser);
         } catch (err) {
             console.log(err);

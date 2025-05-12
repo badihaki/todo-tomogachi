@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import prisma from "@/lib/util/prisma";
+import { createSession } from "@/lib/util/session";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -16,6 +17,8 @@ export async function POST(req: NextRequest) {
       throw new Error("User doesn't exist");
     }
     if (user?.password === password) {
+      await createSession(user); // make sure the user is in session
+
       const response = NextResponse.json(
         {
           success: true,
@@ -25,6 +28,7 @@ export async function POST(req: NextRequest) {
           status: 200,
         }
       );
+
       return response;
     } else {
       throw new Error("Wrong password");
