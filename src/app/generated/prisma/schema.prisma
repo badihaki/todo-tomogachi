@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
+  output   = "../src/app/generated/prisma"
 }
 
 datasource db {
@@ -15,8 +15,25 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
   username String
   password String
+  todos    TodoList[]
+}
+
+model TodoList {
+  id        Int        @id @default(autoincrement())
+  title     String
+  userId    Int        @map("ownerId")
+  user      User       @relation(fields: [userId], references: [id])
+  listItems ListItem[]
+}
+
+model ListItem {
+  id        Int      @id @default(autoincrement())
+  content   String
+  completed Boolean
+  listId    Int
+  todoList  TodoList @relation(fields: [listId], references: [id])
 }

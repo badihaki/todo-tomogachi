@@ -19,4 +19,21 @@ model User{
   email String @unique
   username  String
   password  String
+  todos TodoList[]
+}
+
+model TodoList{
+  id  Int @id @default(autoincrement())
+  title String
+  userId Int @map("ownerId")
+  user  User @relation(fields: [userId], references: [id])
+  listItems ListItem[]
+}
+
+model ListItem{
+  id  Int @id @default(autoincrement())
+  content String
+  completed Boolean
+  listId  Int
+  todoList  TodoList @relation(fields: [listId], references: [id])
 }
