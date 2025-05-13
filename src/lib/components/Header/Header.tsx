@@ -5,6 +5,7 @@ import AuthComponent from '../AuthComponent/AuthComponent'
 import { useAtom } from 'jotai'
 import userAtom from '@/lib/state/UserState'
 import Profile from '../Profile/Profile'
+import Link from 'next/link'
 
 function NavigationBar() {
     const [user] = useAtom(userAtom);
@@ -23,21 +24,36 @@ function NavigationBar() {
                 user ?
                     <>
                         <Profile />
-                        <section className={`w-1/2 place-self-center place-content-center transition-all duration-1000
+                        <section id='nav-links'
+                            className={`w-1/2 place-self-center transition-all duration-1000 grid grid-cols-3 gap-10 lg:gap-56
                 ${isHovering ?
-                                "h-full"
-                                :
-                                "h-0"
-                            }
+                                    "h-full"
+                                    :
+                                    "h-0"
+                                }
                 `}>
-                            <button id='Todo-btn'
-                                className={
-                                    isHovering ?
-                                        `transition-all ease-in-out duration-1000 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer`
-                                        :
-                                        "h-0 hidden"}>
-                                Todos
-                            </button>
+                            <Link href={"/todo"}>
+                                <button id='Todo-btn'
+                                    className={
+                                        isHovering ?
+                                            `transition-all ease-in-out duration-1000 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer`
+                                            :
+                                            "h-0 hidden"}>
+                                    Todos
+                                </button>
+                            </Link>
+ 
+                            <Link href={"/"}>
+                                <button id='home-btn'
+                                    className={
+                                        isHovering ?
+                                            `transition-all ease-in-out duration-1000 bg-blue-400 hover:bg-blue-600 active:bg-blue-200 px-2 py-1 rounded-full my-2 mx-auto w-fit text-sm tracking-widest font-semibold place-self-center cursor-pointer`
+                                            :
+                                            "h-0 hidden"}>
+                                    Home
+                                </button>
+                            </Link>
+ 
                             <button id='pet-btn'
                                 className={
                                     isHovering ?
