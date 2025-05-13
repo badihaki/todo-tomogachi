@@ -2,13 +2,15 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import userAtom from '@/lib/state/UserState';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import React, { useState } from 'react'
 import SignUpForm from './SignUpForm';
+import todosAtom from '@/lib/state/TodosState';
 function SignUpComponent() {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [user, setUser] = useAtom(userAtom);
+  const setTodos = useSetAtom(todosAtom);
 
   const handleShowBtnClick = () => {
     setShowForm(!showForm);
@@ -38,6 +40,7 @@ function SignUpComponent() {
         else {
           console.log(respData.data);
           setUser(respData.data);
+          setTodos([]);
         }
       } catch (err: any) {
         handleError(err.message);

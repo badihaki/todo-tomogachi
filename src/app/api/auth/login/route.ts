@@ -17,12 +17,25 @@ export async function POST(req: NextRequest) {
       throw new Error("User doesn't exist");
     }
     if (user?.password === password) {
+      // get todo lists for this user
+      const todos = await prisma.todoList.findMany({
+        where:{
+          userId:user.id
+        }
+      })
+      // console.log("todo lists found:");
+      // console.log(todos);
+
+      
       await createSession(user); // make sure the user is in session
 
       const response = NextResponse.json(
         {
           success: true,
-          data: user,
+          data: {
+            user,
+            todos,
+          },
         },
         {
           status: 200,

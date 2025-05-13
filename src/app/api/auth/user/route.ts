@@ -16,23 +16,31 @@ export async function GET() {
       );
     }
 
-    const { user } = session;
-    
-    const usableUserData = user as IUser;
+    const { user: userSession } = session;
+
+    const usableUserData = userSession as IUser;
     // const userData = await prisma.user.findFirst();
-    const userData = await prisma.user.findFirst({
-      where:{
-        email:usableUserData.email
-      }
-    })
-    
-    console.log("api/auth/user route got this data:");
-    console.log(userData);
-    
+    const user = await prisma.user.findFirst({
+      where: {
+        email: usableUserData.email,
+      },
+    });
+    const todos = await prisma.todoList.findMany({
+      where: {
+        userId: user?.id,
+      },
+    });
+
+    // console.log("api/auth/user route got this data:");
+    // console.log(user);
+
     const response = NextResponse.json(
       {
         success: true,
-        data: userData,
+        data: {
+          user,
+          todos,
+        },
       },
       { status: 200 }
     );

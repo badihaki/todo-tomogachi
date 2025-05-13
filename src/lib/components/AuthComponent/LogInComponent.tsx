@@ -2,13 +2,16 @@
 
 import React, { useState } from 'react'
 import LogInForm from './LogInForm';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import userAtom from '@/lib/state/UserState';
+import todosAtom from '@/lib/state/TodosState';
 
 function LogInComponent() {
     const [showForm, setShowForm] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [user, setUser] = useAtom(userAtom);
+    const setTodos = useSetAtom(todosAtom);
+
 
     const handleShowBtnClick = () => {
         setShowForm(!showForm);
@@ -27,7 +30,8 @@ function LogInComponent() {
                 throw new Error(respData.error);
             }
             else {
-                setUser(respData.data);
+                setUser(respData.data.user);
+                setTodos(respData.data.todos)
             }
             /* eslint-disable @typescript-eslint/no-explicit-any */
         }

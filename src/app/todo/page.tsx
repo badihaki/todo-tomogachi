@@ -16,6 +16,7 @@ export default function Todo() {
 
     return (
         <main className="mt-30">
+            Todos Page
         </main>
     )
 }

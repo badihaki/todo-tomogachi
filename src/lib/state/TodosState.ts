@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import ITodoList from "../interfaces/todo/ITodoList";
 
-const listsState = atom<ITodoList[] | null>(null);
+const todosAtom = atom<ITodoList[] | null>(null);
 
-export default listsState;
+export default todosAtom;
