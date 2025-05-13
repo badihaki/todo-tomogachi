@@ -32,7 +32,7 @@ function NavigationBar() {
                                     "h-0"
                                 }
                 `}>
-                            <Link href={"/todo"}>
+                            <Link href={"/todo"} className='z-10'>
                                 <button id='Todo-btn'
                                     className={
                                         isHovering ?
@@ -43,7 +43,7 @@ function NavigationBar() {
                                 </button>
                             </Link>
  
-                            <Link href={"/"}>
+                            <Link href={"/"} className='z-10'>
                                 <button id='home-btn'
                                     className={
                                         isHovering ?
