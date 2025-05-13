@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import ITodoList from "../interfaces/ITodoList";
+import ITodoList from "../interfaces/todo/ITodoList";
 
 const listsState = atom<ITodoList[] | null>(null);
 
