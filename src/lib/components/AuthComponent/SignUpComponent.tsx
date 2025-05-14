@@ -11,6 +11,7 @@ function SignUpComponent() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [user, setUser] = useAtom(userAtom);
   const setTodos = useSetAtom(todosAtom);
+  const [canSubmitCreds, setCanSubmitCreds] = useState<boolean>(true);
 
   const handleShowBtnClick = () => {
     setShowForm(!showForm);
@@ -21,7 +22,8 @@ function SignUpComponent() {
     confirmPassword: string,
     username: string
   }) => {
-    console.log("submitting form");
+    setCanSubmitCreds(false);
+
     if (formData.password === formData.confirmPassword) {
       try {
         const response = await fetch("api/auth/signup", {
@@ -54,6 +56,7 @@ function SignUpComponent() {
   async function handleError(errMsg: string) {
     setErrorMsg(errMsg);
     setTimeout(() => {
+      setCanSubmitCreds(true);
       setErrorMsg(null);
     }, 7200);
   }
@@ -72,13 +75,13 @@ function SignUpComponent() {
 
             {
               showForm ?
-                <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+                <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} canSubmitCreds={canSubmitCreds} />
                 :
                 ""
             }
           </>
       }
-      
+
       {
         errorMsg != null ?
           <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>

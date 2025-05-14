@@ -11,6 +11,8 @@ function LogInComponent() {
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [user, setUser] = useAtom(userAtom);
     const setTodos = useSetAtom(todosAtom);
+    const [canSubmitCreds, setCanSubmitCreds] = useState<boolean>(true);
+
 
 
     const handleShowBtnClick = () => {
@@ -20,6 +22,8 @@ function LogInComponent() {
         email: string,
         password: string
     }) => {
+        setCanSubmitCreds(false);
+
         try {
             const response = await fetch("/api/auth/login", {
                 method: 'POST',
@@ -43,6 +47,7 @@ function LogInComponent() {
 
     async function handleError(errMsg: string) {
         setErrorMsg(errMsg);
+        setCanSubmitCreds(true);
         setTimeout(() => {
             setErrorMsg(null);
         }, 7200);
@@ -61,7 +66,7 @@ function LogInComponent() {
                         }</button>
                         {
                             showForm ?
-                                <LogInForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+                                <LogInForm handleSubmitForm={handleSubmitForm} showForm={showForm} canSubmitCreds={canSubmitCreds} />
                                 :
                                 ""
                         }
