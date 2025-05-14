@@ -33,7 +33,7 @@ model TodoList{
 model ListItem{
   id  Int @id @default(autoincrement())
   content String
-  completed Boolean
+  completed Boolean @default(false)
   listId  Int
   todoList  TodoList @relation(fields: [listId], references: [id])
 }
