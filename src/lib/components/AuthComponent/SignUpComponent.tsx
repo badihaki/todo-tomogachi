@@ -62,7 +62,7 @@ function SignUpComponent() {
   }
 
   return (
-    <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit`} >
+    <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit grid grid-cols-1`} >
       {
         user != null ?
           <div>Loading...</div>

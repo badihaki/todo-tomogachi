@@ -36,7 +36,7 @@ function AuthComponent() {
     }
 
     return (
-        <section id='profile' className='bg-blue-100 place-items-center w-full mx-auto'>
+        <section id='profile' className='bg-blue-100 place-items-center w-full mx-auto grid grid-cols-1'>
             <LogInComponent />
             <SignUpComponent />
         </section>

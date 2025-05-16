@@ -6,14 +6,13 @@ function MainFeed() {
     const [user] = useAtom(userAtom);
 
     return (
-        <div>
+        <div className='w-full'>
             <h2>
-                Main feed
+                {user ? `Welcome ${user.username}` : "Main feed"}
             </h2>
             <p>
-                {user ? `Welcome ${user.username}` : ""}
             </p>
-            <p>
+            <p className='w-fit'>
                 {
                     user ?
                         "Find some friends to follow to get the most out of your feed!"

@@ -1,30 +1,13 @@
-'use client'
-
-import React, { useState } from 'react'
-import AuthComponent from '../AuthComponent/AuthComponent'
-import { useAtom } from 'jotai'
-import userAtom from '@/lib/state/UserState'
-import Profile from '../Profile/Profile'
 import Link from 'next/link'
+import React from 'react'
 
-function NavigationBar() {
-    const [user] = useAtom(userAtom);
-    const [isHovering, setIsHover] = useState<boolean>(false);
+function NavLinks(props:{
+    isHovering:boolean
+}) {
+    const {isHovering} = props;
 
-    return (
-        <nav id='header' onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}
-            className={`fixed top-0 transition-all duration-1000 ease-in-out w-screen flex flex-col z-50
-            ${isHovering ?
-                    "bg-indigo-300/95"
-                    :
-                    "bg-blue-300/55"
-                }`}>
-
-            {
-                user ?
-                    <>
-                        <Profile />
-                        <section id='nav-links'
+  return (
+    <section id='nav-links'
                             className={`w-1/2 place-self-center transition-all duration-1000 grid grid-cols-3 gap-10 lg:gap-56
                 ${isHovering ?
                                     "h-full"
@@ -42,7 +25,7 @@ function NavigationBar() {
                                     Todos
                                 </button>
                             </Link>
- 
+
                             <Link href={"/"} className='z-10'>
                                 <button id='home-btn'
                                     className={
@@ -53,7 +36,7 @@ function NavigationBar() {
                                     Home
                                 </button>
                             </Link>
- 
+
                             <button id='pet-btn'
                                 className={
                                     isHovering ?
@@ -63,12 +46,7 @@ function NavigationBar() {
                                 Pet
                             </button>
                         </section>
-                    </>
-                    :
-                    <AuthComponent />
-            }
-        </nav>
-    )
+  )
 }
 
-export default NavigationBar
+export default NavLinks

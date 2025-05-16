@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAtom } from 'jotai';
+import userAtom from '@/lib/state/UserState';
 import React, { ChangeEvent, ChangeEventHandler, FormEvent, FormEventHandler, useState } from 'react'
 
 function NewTodoListForm(props: {
@@ -20,8 +23,9 @@ function NewTodoListForm(props: {
     const { form, setForm, setTask } = props;
     const [canSubmitForm, setCanSubmitForm] = useState<boolean>(true);
     const [canConfirmSubmission, setCanConfirmSubmission] = useState<boolean>(false);
+    const [user] = useAtom(userAtom);
 
-    const handleSubmit: FormEventHandler = (event: FormEvent) => {
+    const handleSubmit: FormEventHandler = async (event: FormEvent) => {
         event.preventDefault();
         if (!canConfirmSubmission) {
             setCanConfirmSubmission(true);
@@ -31,18 +35,42 @@ function NewTodoListForm(props: {
                 setCanConfirmSubmission(false);
                 setCanSubmitForm(false);
 
-                console.log("submitted the form");
+                const body = {
+                    newTodoList: form,
+                    user: user
+                }
+                console.log("submitted the form with body:");
+                console.log(body);
+                
+                // do fetch request here
+                try{
+                    const data = await fetch("/api/todo/new", {
+                        method: "POST",
+                        body: JSON.stringify(body)
+                    })
+                    
+                    // if request is good, show notification
+                    
+                    setTimeout(() => {
+                        setCanSubmitForm(true);
+                    }, 3200);
+                    console.log(data);
+                }
+                catch(err:any){
+                    console.log(err);
+                    setTimeout(() => {
+                        setCanSubmitForm(true);
+                    }, 3200);
+                }
+                // if request is good, show notification
+
                 setForm({
                     title: "",
                     tasks: []
                 });
                 setTask("");
-                // do fetch request here
-                // if request is good, show notification
 
-                setTimeout(() => {
-                    setCanSubmitForm(true);
-                }, 3200);
+
             }
         }
     }

@@ -54,7 +54,7 @@ function LogInComponent() {
     }
 
     return (
-        <section id='section-login' className={`transition-all ease-in-out duration-500 h-fit`}>
+        <section id='section-login' className={`transition-all ease-in-out duration-500 h-fit grid grid-cols-1`}>
             {
                 user != null ?
                     <div>Loading...</div>
@@ -81,7 +81,7 @@ function LogInComponent() {
                     :
                     ""
             }
-            <div className='w-full border-b-4 border-white' />
+            <div className='w-[250px] border-b-2 border-white' />
         </section>
     )
 }
