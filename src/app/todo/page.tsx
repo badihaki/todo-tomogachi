@@ -1,5 +1,6 @@
 'use client'
 
+import TodoList from '@/lib/components/Todo/List/TodoList'
 import todosAtom from '@/lib/state/TodosState'
 import userAtom from '@/lib/state/UserState'
 import { useAtom } from 'jotai'
@@ -12,10 +13,29 @@ export default function Todo() {
     const [todos] = useAtom(todosAtom);
 
     useEffect(() => {
-        if (user === null || todos === null)
+        if (user === null || todos === null) {
             redirect("/");
+        }
+        else {
+            console.log(todos);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const todoLists = () => {
+        if (todos != null && todos.length > 0) {
+            return todos.map(list => {
+                return <TodoList todoList={list} key={list.id} />
+            })
+        }
+        else {
+            return (
+                <>
+                    No Todo List loaded yet
+                </>
+            )
+        }
+    }
 
     return (
         <main className="mt-30">
@@ -24,17 +44,19 @@ export default function Todo() {
             </h2>
 
             {
-                todos && todos.length > 1 ?
+                todos != null && todos.length > 0 ?
                     "You todos are listed below"
                     :
                     <p>
                         You need to
                         <Link href={"todo/new"}
-                        className={`text-blue-600 active:text-blue-900 hover:text-blue-800 ml-1`}>
+                            className={`text-blue-600 active:text-blue-900 hover:text-blue-800 ml-1`}>
                             make a todo list
                         </Link>
                     </p>
             }
+
+            {todoLists()}
         </main>
     )
 }

@@ -1,8 +1,8 @@
 'use client'
 
-import NewTodoAddTask from '@/lib/components/Todo/NewTodoAddTask';
-import NewTodoListForm from '@/lib/components/Todo/NewTodoList';
-import NewTodoPreview from '@/lib/components/Todo/NewTodoPreview';
+import NewTodoAddTask from '@/lib/components/Todo/Create/NewTodoAddTask';
+import NewTodoListForm from '@/lib/components/Todo/Create/NewTodoList';
+import NewTodoPreview from '@/lib/components/Todo/Create/NewTodoPreview';
 import userAtom from '@/lib/state/UserState';
 import { useAtom } from 'jotai';
 import { redirect } from 'next/navigation';

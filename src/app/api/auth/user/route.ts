@@ -31,9 +31,6 @@ export async function GET() {
       },
     });
 
-    // console.log("api/auth/user route got this data:");
-    // console.log(user);
-
     const response = NextResponse.json(
       {
         success: true,
