@@ -1,6 +1,6 @@
 'use client'
 
-import TodoList from '@/lib/components/Todo/List/TodoList'
+import TodoListLink from '@/lib/components/Todo/List/TodoListLink'
 import todosAtom from '@/lib/state/TodosState'
 import userAtom from '@/lib/state/UserState'
 import { useAtom } from 'jotai'
@@ -25,7 +25,7 @@ export default function Todo() {
     const todoLists = () => {
         if (todos != null && todos.length > 0) {
             return todos.map(list => {
-                return <TodoList todoList={list} key={list.id} />
+                return <TodoListLink todoList={list} key={list.id} />
             })
         }
         else {
