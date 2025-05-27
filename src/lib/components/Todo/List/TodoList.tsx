@@ -4,6 +4,7 @@ import userAtom from '@/lib/state/UserState';
 import { useAtom } from 'jotai';
 import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react'
+import TodoListItem from '../Item/TodoListItem';
 
 function TodoList(props: {
     id: number
@@ -22,6 +23,10 @@ function TodoList(props: {
         return null;
     }
 
+    const todoListItems = data()?.listItems.map(item => {
+        return <TodoListItem key={item.id} listItem={item} />
+    })
+
     useEffect(() => {
         if (user === null) {
             redirect('/');
@@ -34,9 +39,12 @@ function TodoList(props: {
             {
                 data != null ?
                     <>
-                        <h2 className='text-black mt-32'>
+                        <h2 className='text-black mt-32 tracking-widest'>
                             {data()?.title}
                         </h2>
+                        <ul>
+                            {todoListItems}
+                        </ul>
                     </>
                     :
                     "No data"

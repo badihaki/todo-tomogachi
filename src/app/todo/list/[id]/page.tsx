@@ -11,7 +11,7 @@ async function Page({
     console.log(`id is ${id}`);
 
     return (
-        <main className="mt-30">
+        <main className="mt-30 place-items-center">
             <TodoList id={id} />
             
             <Link href={"/todo"}>
