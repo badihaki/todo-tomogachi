@@ -26,7 +26,7 @@ function AuthComponent() {
             // console.log(data);
             if (data) {
                 const fetchedUser = data.user;
-                const fetchedTodos = data.todos
+                const fetchedTodos = data.todos;
                 setUser(fetchedUser);
                 setTodos(fetchedTodos);
             }

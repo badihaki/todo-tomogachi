@@ -5,6 +5,7 @@ import NewTodoListForm from '@/lib/components/Todo/Create/NewTodoList';
 import NewTodoPreview from '@/lib/components/Todo/Create/NewTodoPreview';
 import userAtom from '@/lib/state/UserState';
 import { useAtom } from 'jotai';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -50,6 +51,12 @@ function NewTodo() {
             <NewTodoAddTask form={form} setForm={setForm} task={task} setTask={setTask} />
 
             <NewTodoPreview form={form} tasksComponents={tasksComponents} />
+
+            <Link href={"/todo"}>
+                <button type='button' id='back-btn'
+                    className='transition-all ease-in-out duration-200 cursor-pointer bg-blue-500 text-white tracking-wider hover:tracking-widest rounded-full px-2 py-1'>Go Back</button>
+            </Link>
+            
         </main>
     )
 }
