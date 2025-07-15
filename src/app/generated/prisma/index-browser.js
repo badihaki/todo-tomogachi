@@ -127,6 +127,19 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.TodoListScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  userId: 'userId'
+};
+
+exports.Prisma.ListItemScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  completed: 'completed',
+  listId: 'listId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -139,7 +152,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  TodoList: 'TodoList',
+  ListItem: 'ListItem'
 };
 
 /**

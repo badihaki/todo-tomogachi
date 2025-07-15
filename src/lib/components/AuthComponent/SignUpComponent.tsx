@@ -1,12 +1,17 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import userAtom from '@/lib/state/UserState';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import React, { useState } from 'react'
 import SignUpForm from './SignUpForm';
+import todosAtom from '@/lib/state/TodosState';
 function SignUpComponent() {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [user, setUser] = useAtom(userAtom);
+  const setTodos = useSetAtom(todosAtom);
+  const [canSubmitCreds, setCanSubmitCreds] = useState<boolean>(true);
 
   const handleShowBtnClick = () => {
     setShowForm(!showForm);
@@ -17,7 +22,8 @@ function SignUpComponent() {
     confirmPassword: string,
     username: string
   }) => {
-    console.log("submitting form");
+    setCanSubmitCreds(false);
+
     if (formData.password === formData.confirmPassword) {
       try {
         const response = await fetch("api/auth/signup", {
@@ -36,6 +42,7 @@ function SignUpComponent() {
         else {
           console.log(respData.data);
           setUser(respData.data);
+          setTodos([]);
         }
       } catch (err: any) {
         handleError(err.message);
@@ -49,12 +56,13 @@ function SignUpComponent() {
   async function handleError(errMsg: string) {
     setErrorMsg(errMsg);
     setTimeout(() => {
+      setCanSubmitCreds(true);
       setErrorMsg(null);
     }, 7200);
   }
 
   return (
-    <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit`} >
+    <section id='section-signup' className={`transition-all ease-in-out duration-500 h-fit grid grid-cols-1`} >
       {
         user != null ?
           <div>Loading...</div>
@@ -67,13 +75,13 @@ function SignUpComponent() {
 
             {
               showForm ?
-                <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} />
+                <SignUpForm handleSubmitForm={handleSubmitForm} showForm={showForm} canSubmitCreds={canSubmitCreds} />
                 :
                 ""
             }
           </>
       }
-      
+
       {
         errorMsg != null ?
           <div id='login-err' className='text-red-600 text-sm tracking-wider font-semibold w-fit block place-self-center'>

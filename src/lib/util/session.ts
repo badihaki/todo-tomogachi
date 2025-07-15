@@ -39,17 +39,14 @@ export async function createSession(user: IUser) {
 
   // set name, value (session value, everything needed to login), partial response cookie obj
   cookiesObj.set(cookie.name, session, cookie);
-  console.log("making a cookie: ");
-  console.log(await cookiesObj.get(cookie.name));
-  //   redirect("/");
   return null;
 }
 
 export async function verifySession() {
   const cookiesObj = await cookies();
   const session = await cookiesObj.get(cookie.name);
-  console.log("session: ");
-  console.log(session);
+  // console.log("session: ");
+  // console.log(session);
   
   if (!session) {
     return null;
